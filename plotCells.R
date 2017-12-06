@@ -8,7 +8,7 @@ plotCells <- function(data = NULL, probe = NULL,
     stop("No probe name was given for plotting.\n ")
   }
   if(substr(posCol, 1, 1) != "#"){
-    posCol <- GetColorHex(posCol)
+    posCol <- .getColorHex(posCol)
   }
   
   probeColumn <- grep(colnames(data@assayData), pattern = probe, ignore.case = TRUE, fixed = FALSE)
@@ -17,9 +17,10 @@ plotCells <- function(data = NULL, probe = NULL,
   }
   main.text <- paste(data@phenoData['samplename', 1] , ":",colnames(data@experimentData)[probeColumn])
   sub.text.left <- paste("Total cells:", data@experimentData['totalCount', probeColumn])
-  sub.text.middle <- paste("Positive Ratio:", round(data@experimentData['posRatio', probeColumn]), digits = 2)
+  sub.text.middle <- paste("Positive Ratio:", round(data@experimentData['posRatio', probeColumn], digits = 1), "%")
   sub.text.right <- paste("Total positive cells:", data@experimentData['posCount', probeColumn])
   magnification.text <- paste0("Magnification: ", magnification,"x")
+  threshold.text <- paste("Threshold:", data@experimentData['threshold', probeColumn])
   
   plot(data@xyData[,1], data@xyData[,2], 
        pch = 20, cex = cex,
@@ -31,6 +32,7 @@ plotCells <- function(data = NULL, probe = NULL,
   mtext(sub.text.middle, side = 3, cex = 0.8)
   mtext(sub.text.right, side = 3, adj = 1, cex = 0.8)
   mtext(magnification.text, side = 4 , adj = 0, cex = 0.8)
+  mtext(threshold.text, side = 4 , adj = 1, cex = 0.8)
   
   posColor <- paste0(posCol, as.character(density))
   posColor <- rep(posColor, dim(data@assayData)[1])

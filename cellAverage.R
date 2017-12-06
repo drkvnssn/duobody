@@ -1,4 +1,4 @@
-cellMean <- function(x = NULL, threshold = NULL, type = "pos", algorithm = "mean"){
+.cellAverage <- function(x = NULL, threshold = NULL, type = "pos", algorithm = "mean"){
   if(is.null(x) == TRUE | is.null(threshold == TRUE)){
     stop("Input for cellCount is not given.\n")
   }
@@ -14,7 +14,7 @@ cellMean <- function(x = NULL, threshold = NULL, type = "pos", algorithm = "mean
   } else  if(tolower(algorithm) == "median"){
     result <- median(x)
   } else if(tolower(algorithm) == "mode"){
-    result <- Mode(x)
+    result <- .Mode(x)
   }
   return(result)
 }

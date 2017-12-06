@@ -1,4 +1,4 @@
-cellCount <- function(x = NULL, threshold = NULL, type = "pos"){
+.cellCount <- function(x = NULL, threshold = NULL, type = "pos"){
   if(is.null(x) == TRUE | is.null(threshold == TRUE)){
     stop("Input for cellCount is not given.\n")
   }
