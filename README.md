@@ -16,6 +16,8 @@
 # A simple overview of the data structure can be requested with 'overview()'
 #
 # data can be plotted with 'plotCells()'
+#
+# Use 'writeMIPFdata()' to write experiment data to disk.
 ##
 
 

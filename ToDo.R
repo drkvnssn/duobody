@@ -1,11 +1,14 @@
 # [x] add read.xlsx to the functions
-# [ ] create a loop for each sample file
-# [ ] create a loop for each probe
+# [ ] function to create 2 subsets and get all the data
+# [ ] function to create 3 subsets and get all the data
 
 ### plotting
 # [x] add samplename to plot
 # [ ] add threshold to current plot
 # [ ] add min/max mean/median/mode data to plot
+# [ ] plot 'normal' set and 'subset' into one plot
+# [ ] plot 'normal' set and multiple 'subset'
+
 
 ### output file
 # [x] threshold
@@ -16,7 +19,7 @@
 # [x] total negative cells / probe
 # [ ] multiple positive cells
 # [x] total negative only cells 
-# [ ] write file
+# [x] write file
 
 ### functions
 # [ ] updateTheshold
