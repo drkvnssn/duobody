@@ -1,10 +1,10 @@
-FISHdata <- setClass("FISHdata", slots = c(assayData = "matrix", 
-                                             useData = "matrix", 
+MPIFdata <- setClass("MPIFdata", slots = c(assayData = "matrix", 
+                                             posCellData = "matrix", 
                                              xyData = "data.frame",
                                              experimentData = "matrix",
                                              phenoData = "matrix"))
 
-readFISHfile <- function(samplefile =  NULL, thresholdfile = NULL, 
+readMPIFfile <- function(samplefile =  NULL, thresholdfile = NULL, 
                                verbose = TRUE){
  
   ### CHECKING FOR FILES
@@ -30,14 +30,10 @@ readFISHfile <- function(samplefile =  NULL, thresholdfile = NULL,
   }
 
   ### READING XLS DATA
-  computer.name <- Sys.info()["sysname"]
-    if(computer.name == "Darwin"){
-      source("https://gist.github.com/schaunwheeler/5825002/raw/3526a15b032c06392740e20b6c9a179add2cee49/xlsxToR.r")
-      checkPackages("pbapply")
-      sample.data <- xlsxToR(file = samplefile, header = TRUE)
-    } else if(computer.name == "Windows"){
-      sample.data <- read.xls(file = samplefile, header = TRUE) 
-    }
+  if(verbose == TRUE){
+    cat("Reading .xlsx file.\n")
+  }
+    sample.data <- xlsxToR(file = samplefile, header = TRUE)
 
   ### READING THRESHOLD DATA
   threshold.data <- read.table(thresholdfile, header = TRUE, sep = "\t")
@@ -48,8 +44,8 @@ readFISHfile <- function(samplefile =  NULL, thresholdfile = NULL,
   assayData <- apply(X = assayData, MARGIN = 2, FUN = as.numeric)
   probes <- gsub(x = colnames(assayData), pattern = "Mean ", replacement = "")
   colnames(assayData) <- probes
-  useData <- matrix(data = NA, nrow = nrow(assayData), ncol = ncol(assayData))
-  colnames(useData) <- probes
+  posCellData <- matrix(data = NA, nrow = nrow(assayData), ncol = ncol(assayData))
+  colnames(posCellData) <- probes
   xyData <- sample.data[,17:18]
   
   ### CREATE BASIC INFORMATION FOR ALL THE PROBES
@@ -64,6 +60,8 @@ readFISHfile <- function(samplefile =  NULL, thresholdfile = NULL,
   experimentData['totalCount', ] <- dim(assayData)[1]
   
   thresholdProbes <- tolower(threshold.data[,1])
+  
+  ### PLACE ALL THE DATA IN THE CORRECT LOCATION
   for(i in 1:length(thresholdProbes)){
     assayColumn <- grep(colnames(assayData), pattern = thresholdProbes[i], ignore.case = TRUE, fixed = FALSE)
     thresholdRow <- grep(threshold.data[,1],  pattern = thresholdProbes[i], ignore.case = TRUE, fixed = FALSE)
@@ -85,16 +83,17 @@ readFISHfile <- function(samplefile =  NULL, thresholdfile = NULL,
     experimentData['negCount', experimentColumn] <- cellCount(x = assayData[,assayColumn], 
                                                threshold = threshold.data[thresholdRow, 2],
                                                type = "neg")
+    posCellData[, assayColumn] <- assayData[, assayColumn] >= threshold.data[thresholdRow, 2]
   }
   experimentData['posRatio', ] <- (100/experimentData['totalCount', ]) * experimentData['posCount', ]
   experimentData['negRatio', ] <- (100/experimentData['totalCount', ]) * experimentData['negCount', ]
   experimentData['totalRatio', ] <- experimentData['posRatio', ] + experimentData['negRatio', ]
-
+  experimentData <- round(experimentData, digits = 2)
+  
   ### PHENODATA
   phenoRows <- c("samplename", "filepath", "samplefile", "thresholdfile")
   phenoData <- matrix(data = NA, nrow = length(phenoRows), ncol = 1,
                            dimnames = list(phenoRows, c("")))
-  
   phenoData['samplename', 1] <- .mgsub(basename(samplefile), 
                                     pattern = c("ALP",".xlsx"), 
                                     replacement = c("",""))
@@ -103,7 +102,7 @@ readFISHfile <- function(samplefile =  NULL, thresholdfile = NULL,
   phenoData['thresholdfile', 1] <- basename(thresholdfile)
                                     
   ### COMBINE ALL DATA INTO ONE STRUCTURE ----
-  object <- new('FISHdata', assayData = assayData, useData = useData, 
+  object <- new('MPIFdata', assayData = assayData, posCellData = posCellData, 
                 xyData = xyData, experimentData = experimentData,
                 phenoData = phenoData)
   
