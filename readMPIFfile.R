@@ -101,7 +101,7 @@ readMPIFfile <- function(file =  NULL, thresholdfile = NULL,
   experimentData <- round(experimentData, digits = 2)
   
   ### PHENODATA
-  phenoRows <- c("samplename", "filepath", "samplefile", "thresholdfile")
+  phenoRows <- c("samplename", "subset", "filepath", "samplefile", "thresholdfile")
   phenoData <- matrix(data = NA, nrow = length(phenoRows), ncol = 1,
                            dimnames = list(phenoRows, c("")))
   phenoData['samplename', 1] <- .mgsub(basename(file), 
