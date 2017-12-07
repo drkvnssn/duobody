@@ -87,4 +87,3 @@ analyzeProbes <- function(data = NULL, probes = NULL,
   results <- data.frame(results)
   return(results)
 }
- 

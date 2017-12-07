@@ -1,4 +1,4 @@
-.probeCombn <- function(p1, p2){
+.probeCombn2 <- function(p1, p2){
     p1pp2p <- paste0(p1,"+, ", p2,"+")
     p1pp2n <- paste0(p1,"+, ", p2,"-")
     p1np2p <- paste0(p1,"-, ", p2,"+")
@@ -7,10 +7,9 @@
     
     return(result)
 }
-.probeCombn <- function(p1, p2){
+.probeCombn4 <- function(p1, p2){
   p1p2p <- paste0(p1,", ", p2,"+")
   p1p2n <- paste0(p1,", ", p2,"-")
   result <- c(p1p2p, p1p2n)
-  
   return(result)
 }
