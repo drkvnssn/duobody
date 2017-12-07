@@ -13,21 +13,29 @@ readMPIFfile <- function(file =  NULL, thresholdfile = NULL,
   } else if(file.exists(file) == FALSE){
     stop("Sample file does not exists.\n\n")
   }
+  
   if(is.null(thresholdfile) == TRUE){
     if(verbose == TRUE){
       cat("Threshold file not given. Looking for alternative.\n")
     }
-    thresholdfile <- gsub(x = file, pattern = ".xlsx", replacement = ".txt")
-    if(file.exists(thresholdfile) != FALSE){
+    threshold.file <- gsub(x = file, pattern = ".xlsx", replacement = ".txt")
+    
+    if(file.exists(threshold.file) == TRUE){
+      thresholdfile <- threshold.file
+    } else {
       if(verbose == TRUE){
         cat("   Looking for second alternative.\n")
       }
-      thresholdfile <- gsub(thresholdfile, pattern = basename(thresholdfile), replacement = "thresholds.txt")
-      if(file.exists(thresholdfile) != FALSE){
-        stop("Threshold file has not been given and no alternative has been found.\n")
-    }
-  } 
-}
+      threshold.file <- gsub(file, pattern = basename(file), replacement = "thresholds.txt")
+      if(file.exists(threshold.file) == TRUE){
+        thresholdfile <- threshold.file
+      } 
+    }  
+    if(is.null(thresholdfile) == TRUE){
+      stop("Threshold file has not been given and no alternative has been found.\n")
+      }
+  }
+  
   ### READING XLS DATA
   if(verbose == TRUE){
     cat("Reading .xlsx data file.\n")
