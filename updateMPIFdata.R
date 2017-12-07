@@ -7,7 +7,7 @@
   thresholds <- data@experimentData['threshold', ]
   
   for(p in 1:length(probes)){
-    probeColumn <- grep(colnames(assayData), pattern = probes[p], ignore.case = TRUE, fixed = FALSE)
+    probeColumn <- grep(colnames(data@assayData), pattern = probes[p], ignore.case = TRUE, fixed = FALSE)
     
     data@experimentData['posMean', probeColumn] <- .cellAverage(x = data@assayData[,probeColumn], 
                                                                 threshold = thresholds[p],
