@@ -1,5 +1,6 @@
 analyzeProbes <- function(data = NULL, probes = NULL, 
-                           verbose = FALSE){
+                          write = TRUE, 
+                          verbose = FALSE){
   if((class(data)[1] == "MPIFdata") != TRUE){
     stop ("data structure is not in the correct format.\n\n")
   } 
@@ -24,6 +25,7 @@ analyzeProbes <- function(data = NULL, probes = NULL,
     probe1 <- colnames(data@assayData)[probe1Column]
     probe2Column <- grep(colnames(data@assayData), pattern = probes[2], ignore.case = TRUE, fixed = FALSE)
     probe2 <- colnames(data@assayData)[probe2Column]
+    probes <- c(probe1, probe2)
     
     probe1pos <- subsetProbe(data = data, probe = probes[1], positive = TRUE)
     probe2pos <- subsetProbe(data = probe1pos, probe = probes[2], positive = TRUE)
@@ -53,7 +55,8 @@ analyzeProbes <- function(data = NULL, probes = NULL,
   probe2Column <- grep(colnames(data@assayData), pattern = probes[2], ignore.case = TRUE, fixed = FALSE)
   probe2 <- colnames(data@assayData)[probe2Column]
   probe3Column <- grep(colnames(data@assayData), pattern = probes[3], ignore.case = TRUE, fixed = FALSE)
-  probe3 <- colnames(data@assayData)[probe2Column]
+  probe3 <- colnames(data@assayData)[probe3Column]
+  probes <- c(probe1, probe2, probe3)
   
   probe1pos <- subsetProbe(data = data, probe = probes[1], positive = TRUE)
   probe2pos <- subsetProbe(data = probe1pos, probe = probes[2], positive = TRUE)
@@ -85,5 +88,14 @@ analyzeProbes <- function(data = NULL, probes = NULL,
   results[7,2] <- probe2neg@experimentData['negCount', probe3Column]
   }
   results <- data.frame(results)
+  if(is.null(write) != TRUE){
+    file <- paste0(data@phenoData['samplename',],"_",
+                   paste0(probes, collapse = ":"),
+                   ".txt")
+    outputfile <- file.path(data@phenoData['filepath',1],
+                            file)
+    write.table(file = outputfile, x = results, sep = "\t", 
+                quote = FALSE, row.names = FALSE)
+  }
   return(results)
 }
