@@ -5,6 +5,8 @@
 ### plotting
 # [x] add samplename to plot
 # [ ] add threshold to current plot
+# [ ] add subset text to plot if this is available
+
 # [ ] add min/max mean/median/mode data to plot
 # [ ] plot 'normal' set and 'subset' into one plot
 # [ ] plot 'normal' set and multiple 'subset'
