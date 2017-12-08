@@ -4,18 +4,19 @@ analyzeProbes <- function(data = NULL, probes = NULL,
   if((class(data)[1] == "MPIFdata") != TRUE){
     stop ("data structure is not in the correct format.\n\n")
   } 
-  if(is.null(probe1) == TRUE){
-    stop("Probe 1 for subsetting was not given.\n")
+  if(is.null(probes) == TRUE){
+    stop("No probes have been given.\n")
   }
-  if(is.null(probe1) == TRUE){
-    stop("Probe 2 for subsetting was not given.\n")
+  if(length(probes) == 1){
+    stop("There are 2 or 3 probes needed for analysis.\n")
   }
   if(verbose == TRUE){
     cat("Creating subsets.\n")
   }
-  
-  probes <- unique(tolower(probes))
-  
+  if((length(probes) > length(unique(tolower(probes)))) == TRUE){
+    stop("Probes are not unique enough.\n")
+  }
+
   ### create subsets
   if(length(probes) == 2){
     if(verbose == TRUE){
@@ -90,12 +91,17 @@ analyzeProbes <- function(data = NULL, probes = NULL,
   results <- data.frame(results)
   if(is.null(write) != TRUE){
     file <- paste0(data@phenoData['samplename',],"_",
-                   paste0(probes, collapse = ":"),
-                   ".txt")
-    outputfile <- file.path(data@phenoData['filepath',1],
+                   paste0(probes, collapse = "_"),
+                   ".xlsx")
+    outputfile <- paste0(data@phenoData['filepath',1],
                             file)
-    write.table(file = outputfile, x = results, sep = "\t", 
-                quote = FALSE, row.names = FALSE)
+    .checkPackages(x = "xlsx")
+    write.xlsx(file = outputfile, x = results, row.names = FALSE)
+    if(verbose == TRUE){
+      cat("\nData has been save to disk at the following location.\n")
+      print(data@phenoData['filepath',1])
+      cat("\n")
+    }
   }
   return(results)
 }
