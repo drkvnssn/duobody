@@ -8,9 +8,13 @@ sample '.xlsx' files can be read with 'readMPIFfile' function and data will be s
 a dedicated S4 structure with the following structure.
 
 assayData -> holds the intensity for each probe / cell
+
 posCellData -> TRUE / FALSE value for each probe / cell based on the thresholds
+
 xyData -> holds the xy position for each cell in mm
+
 experimentData -> basic statistics for each probe/cell
+
 phenoData -> basic information about the sample & file
 
 A threshold holding the thresholds for each probe can be given or a text file with the 
