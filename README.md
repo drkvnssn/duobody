@@ -120,7 +120,11 @@ Color of  positive subset be manually added with posCol (hex or by stating a col
 
 ```
 plotCells(data = data, probe = "cd3")
-plotCells(data = data, probe = "pax")
+plotCells(data = data, probe = "pax", posCol = "green")
+plotCells(data = data, probe = "pdl1", posCol = "purple", 
+          gridBreaks = 3)
+plotCells(data = data, probe = "pdl1", posCol = "purple", 
+          cex = 0.7, density = 70, gridBreaks = 5)
 ```
 
 ### Analysis 
@@ -137,3 +141,13 @@ If results need to be stored, add 'write = TRUE' and an excel file will be store
 macro <- c("cd163","pdl")
 analyzeProbes(data, macro, write = TRUE)
 ```
+
+# 2017-12-08 Added plotting with Shiny
+
+### plotting 
+
+Added plotting with shiny to keep make some interactions with the plot more easy to access. Some of the options are:
+* Positive probe selection
+* Positive probe color
+* Positive probe size
+* Positive probe density
