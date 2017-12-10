@@ -1,17 +1,12 @@
 library(shiny)
-functions.path <- "/Users/dirkvanessen/Documents/coding/R/duobody"
-source(file.path(functions.path,"sourceDir.R"))
-sourceDir(functions.path)
+
+# 1. load/source the MIPF functions
+# 2. read MIPF file into 'data' vector
+#   * data <- readMPIFfile(file = files)
+# 3. run Shiny....
 
 # Define server logic and plot
 shinyServer(function(input, output){
-  data.path <- "/Users/dirkvanessen/Documents/coding/R/duobody data daniella/data"
-  files <- list.files(path = data.path, pattern = ".xlsx", full.names = TRUE)
-  ###
-  sample <- 1
-  ###
-  data <- readMPIFfile(file = files[sample], verbose = FALSE)
-  
     output$plotting <- renderPlot({
       # generate the plot for cells
       plotCells(data = data, probe = input$probe, 

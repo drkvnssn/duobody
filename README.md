@@ -151,3 +151,9 @@ Added plotting with shiny to keep make some interactions with the plot more easy
 * Positive probe color
 * Positive probe size
 * Positive probe density
+
+## To run Shiny on a data file.. do the following
+1. load/source the MIPF functions
+2. read MIPF file into 'data' vector
+   * data <- readMPIFfile(file = file)
+3. run Shiny....
