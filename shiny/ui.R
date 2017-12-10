@@ -1,12 +1,12 @@
 library(shiny)
 
-# Define UI for application that plots random distributions 
+# Define UI for application 
 shinyUI(pageWithSidebar(
   
   # Application title
   headerPanel("Positive cells for a selected probe:"),
   
-  # Sidebar with a slider input for number of observations
+  # User input for probe and color
   sidebarPanel(
     selectInput("probe", 
                 "Probe:", 
@@ -16,8 +16,8 @@ shinyUI(pageWithSidebar(
                 choices = c("red","orange","green","blue","purple","black"))
   ),
   
-  # Show a plot of the generated distribution
+  # Show a plot of positive cells
   mainPanel(
-    plotOutput("plotCells")
+    plotOutput("plotting")
   )
 ))

@@ -8,9 +8,10 @@ shinyServer(function(input, output){
   data.path <- "/Users/dirkvanessen/Documents/coding/R/duobody data daniella/data"
   files <- list.files(path = data.path, pattern = ".xlsx", full.names = TRUE)
   data <- readMPIFfile(file = files[1], verbose = FALSE)
-  
-  output$plotCells <- renderPlot({
-    # generate an plot
-    plotCells(data = data, probe = input$probe, posCol = input$color)
-  })
+    output$plotting <- renderPlot({
+      # generate the plot for cells
+      plotCells(data = data, probe = input$probe, posCol = input$color)
+    })
+
+
 })
