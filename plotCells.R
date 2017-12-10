@@ -1,7 +1,8 @@
 plotCells <- function(data = NULL, probe = NULL, 
                       pch = 20, cex = 0.8,
                       posCol = "green", 
-                      density = 80, magnification = 40){
+                      density = 80, magnification = 40,
+                      bg = "#D3D3D3", gridBreaks = 2){
   if((class(data)[1] == "MPIFdata") != TRUE){
     stop("data structure is not in the correct format.\n\n")
   } 
@@ -30,16 +31,21 @@ plotCells <- function(data = NULL, probe = NULL,
     posColor <- rep(posColor, dim(data@assayData)[1])
     posCells <- data@posCellData[, probeColumn] 
   }
-  
-  ### PLOTTING THE CELLS
+  ### CREATE EMPTY PLOT
+  par(bg = bg)
   plot(data@xyData[,1], data@xyData[,2], 
-       pch = pch, cex = cex,
-       col = "#00000020",
+       bty='n', col = bg, 
        main = main.text,
        xlab = colnames(data@xyData)[1],
        ylab = colnames(data@xyData)[2])
   mtext(magnification.text, side = 4 , adj = 0, cex = 0.8)
   mtext(sub.text.left, side = 3, adj = 0, cex = 0.8)
+  
+  ### PLOTTING THE CELLS
+  points(data@xyData[,1], data@xyData[,2], 
+         pch = pch, cex = cex,
+         col = "#00000020",
+         main = main.text)
   
   ### PLOTTING PROBE INFORMATION
   if(is.null(probe) == FALSE){
@@ -50,4 +56,6 @@ plotCells <- function(data = NULL, probe = NULL,
     mtext(sub.text.right, side = 3, adj = 1, cex = 0.8)
     mtext(threshold.text, side = 4 , adj = 1, cex = 0.8)
   }
+  ### PLOT GRID
+  .plotGrid(xyData = data@xyData, breaks = gridBreaks) 
 }

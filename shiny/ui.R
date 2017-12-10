@@ -12,8 +12,14 @@ shinyUI(pageWithSidebar(
                 "Probe:", 
                 choices = c("PD1","CD163","CD3","CD8","PDL1","PAX5")),
     selectInput("color", 
-                "Colour:", 
-                choices = c("red","orange","green","blue","purple","black"))
+                "Positive cell colour:", 
+                choices = c("red","orange","green","blue","purple","black")),
+    sliderInput("size", 
+                "Cell size", 
+                min = 0.2, max = 3, value = .8),
+    sliderInput("density", 
+                "Positive cell density", 
+                min = 1, max = 99, value = 50)
   ),
   
   # Show a plot of positive cells

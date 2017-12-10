@@ -7,11 +7,16 @@ sourceDir(functions.path)
 shinyServer(function(input, output){
   data.path <- "/Users/dirkvanessen/Documents/coding/R/duobody data daniella/data"
   files <- list.files(path = data.path, pattern = ".xlsx", full.names = TRUE)
-  data <- readMPIFfile(file = files[1], verbose = FALSE)
+  ###
+  sample <- 1
+  ###
+  data <- readMPIFfile(file = files[sample], verbose = FALSE)
+  
     output$plotting <- renderPlot({
       # generate the plot for cells
-      plotCells(data = data, probe = input$probe, posCol = input$color)
+      plotCells(data = data, probe = input$probe, 
+                posCol = input$color,
+                cex = input$size,
+                density = input$density)
     })
-
-
 })
