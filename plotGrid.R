@@ -1,4 +1,4 @@
-.plotGrid <- function(xyData = NULL, breaks = 3){
+.plotGrid <- function(xyData = NULL, breaks = 3, lineCol = "black"){
   if(is.null(xyData)){
     stop("xyData structure is not in the correct format.\n\n")
   }
@@ -18,8 +18,8 @@
         x.result <- c(x.result, x.result[i]+x.break)
         y.result <- c(y.result, y.result[i]+y.break)
       }
-      abline(v = x.result, col = "#FFFFFF80")
-      abline(h = y.result, col = "#FFFFFF80")
+      abline(v = x.result, col = lineCol)
+      abline(h = y.result, col = lineCol)
     }
   }
 }

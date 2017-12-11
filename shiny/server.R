@@ -13,7 +13,8 @@ shinyServer(function(input, output){
       plotCells(data = data, probe = input$probe, 
                 posCol = input$color,
                 cex = input$size,
-                density = input$density)
+                density = input$density,
+                lineCol = input$line)
       } else {
         cellIntensity(data = data)
       }

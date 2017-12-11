@@ -2,7 +2,8 @@ plotCells <- function(data = NULL, probe = NULL,
                       pch = 20, cex = 0.8,
                       posCol = "green", 
                       density = 80, magnification = 40,
-                      bg = "#D3D3D3", gridBreaks = 3){
+                      bg = "#D3D3D3", gridBreaks = 3,
+                      lineCol = "black"){
   if((class(data)[1] == "MPIFdata") != TRUE){
     stop("data structure is not in the correct format.\n\n")
   } 
@@ -10,6 +11,9 @@ plotCells <- function(data = NULL, probe = NULL,
     cat("No probe name was given for plotting.\n ")
   }
   if(substr(posCol, 1, 1) != "#"){
+    posCol <- .getColorHex(posCol)
+  }
+  if(substr(lineCol, 1, 1) != "#"){
     posCol <- .getColorHex(posCol)
   }
   
@@ -57,5 +61,6 @@ plotCells <- function(data = NULL, probe = NULL,
     mtext(threshold.text, side = 4 , adj = 1, cex = 0.8)
   }
   ### PLOT GRID
-  .plotGrid(xyData = data@xyData, breaks = gridBreaks) 
+  .plotGrid(xyData = data@xyData, breaks = gridBreaks,
+            lineCol = lineCol) 
 }

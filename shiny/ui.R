@@ -16,6 +16,9 @@ shinyUI(pageWithSidebar(
     selectInput("color", 
                 "Positive cell colour:", 
                 choices = c("red","orange","green","blue","purple","black")),
+    selectInput("line", 
+                "Grid color", 
+                choices = c("black", "white", "orange","red","blue","green","purple")),
     sliderInput("size", 
                 "Cell size", 
                 min = 0.2, max = 3, value = .8),
@@ -26,6 +29,6 @@ shinyUI(pageWithSidebar(
   
   ### Show a plot of positive cells -------
   mainPanel(
-    plotOutput("plotting")
+    plotOutput("plotting", width = "100%", height = "600px")
   )
 ))
