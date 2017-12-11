@@ -8,10 +8,14 @@ library(shiny)
 # Define server logic and plot
 shinyServer(function(input, output){
     output$plotting <- renderPlot({
+      if (identical(input$plotType, "Cells")) {
       # generate the plot for cells
       plotCells(data = data, probe = input$probe, 
                 posCol = input$color,
                 cex = input$size,
                 density = input$density)
+      } else {
+        cellIntensity(data = data)
+      }
     })
 })
