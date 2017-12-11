@@ -12,7 +12,7 @@ shinyUI(pageWithSidebar(
     radioButtons("plotType", "Plot Type:", choices = c("Cells", "Boxplot")),
     selectInput("probe", 
                 "Probe:", 
-                choices = c("PD1","CD163","CD3","CD8","PDL1","PAX5")),
+                choices = c("PD1","CD163","Pax5","CD8","PDL1","DAPI","CD3")),
     selectInput("color", 
                 "Positive cell colour:", 
                 choices = c("red","orange","green","blue","purple","black")),
