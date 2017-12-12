@@ -9,7 +9,7 @@ shinyUI(pageWithSidebar(
   ### User input for probe and color ---------
   
   sidebarPanel(
-    radioButtons("plotType", "Plot Type:", choices = c("Cells", "Boxplot")),
+    radioButtons("plotType", "Plot Type:", choices = c("Boxplot", "Cells")),
     selectInput("probe", 
                 "Probe:", 
                 choices = c("PD1","CD163","Pax5","CD8","PDL1","DAPI","CD3")),
