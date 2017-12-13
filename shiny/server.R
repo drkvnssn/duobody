@@ -17,7 +17,7 @@ shinyServer(function(input, output){
                 density = input$density,
                 lineCol = input$line)
       } else {
-        cellIntensity(data = data)
+        plotCellIntensity(data = data)
       }
     })
 })

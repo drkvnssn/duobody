@@ -1,4 +1,4 @@
-cellIntensity <- function(data = NULL, points = NULL, size = 75, col = "red"){
+plotCellIntensity <- function(data = NULL, points = NULL, size = 75, col = "red"){
   if((class(data)[1] == "MPIFdata") != TRUE){
     stop ("data structure is not in the correct format.\n\n")
   } 
@@ -27,8 +27,8 @@ cellIntensity <- function(data = NULL, points = NULL, size = 75, col = "red"){
   } 
   
 
-  main.text <- "Boxplot of positive cells for each probe"
-  boxplot(sample.data$boxplot, col = colors, main = main.text)
+  main.text <- paste(data@phenoData['samplename', 1], ":", "Boxplot of positive cells / probe")
+  boxplot(sample.data$boxplot, col = colors, main = main.text) 
   if(is.numeric(size) == TRUE){
     points(x = jitter(sample.data$x), y = sample.data$y, cex = 0.3, col = "red", pch = 20)
   }
