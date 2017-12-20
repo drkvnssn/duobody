@@ -1,5 +1,6 @@
 updateThreshold <- function(data = NULL, probe = NULL, threshold = NULL, 
                             plot = TRUE, col = "red", write = FALSE,
+                            gridBreaks = 3,
                             verbose = TRUE){
   if((class(data)[1] == "MPIFdata") != TRUE){
     stop ("data structure is not in the correct format.\n\n")
@@ -38,7 +39,7 @@ updateThreshold <- function(data = NULL, probe = NULL, threshold = NULL,
   }
   
   if(plot == TRUE){
-    plotCells(data = data, probe = probe, posCol = col)
+    plotCells(data = data, probe = probe, posCol = col, gridBreaks = gridBreaks)
   }
   
   return(data)

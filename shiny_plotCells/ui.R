@@ -10,9 +10,9 @@ shinyUI(pageWithSidebar(
   
   sidebarPanel(
     radioButtons("plotType", "Plot Type:", choices = c("Boxplot", "Cells")),
-    selectInput("probe", 
+    textInput("probe", 
                 "Probe:", 
-                choices = c("PD1","CD163","Pax5","CD8","PDL1","DAPI","CD3")),
+                "cd3"),
     selectInput("color", 
                 "Positive cell colour:", 
                 choices = c("red","orange","green","blue","purple","black")),
@@ -25,9 +25,9 @@ shinyUI(pageWithSidebar(
     sliderInput("density", 
                 "Positive cell density", 
                 min = 1, max = 99, value = 50),
-    selectInput("subProbe", 
+    textInput("subProbe", 
                 "Subset Probe:", 
-                choices = c("DAPI","PD1","CD163","Pax5","CD8","PDL1","CD3")),
+                "dapi"),
     selectInput("subPos", 
                 "Subset Pos / Neg:", 
                 choices = c("+","-")),

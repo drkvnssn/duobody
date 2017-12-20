@@ -16,7 +16,7 @@ shinyServer(function(input, output){
                 cex = input$size,
                 density = input$density,
                 lineCol = input$line,
-                subset = c(input$subProbe,input$subPos,input$subCol))
+                subset1 = c(input$subProbe,input$subPos,input$subCol))
       } else {
         plotCellIntensity(data = data)
       }

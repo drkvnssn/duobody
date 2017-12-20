@@ -2,8 +2,8 @@ plotCells <- function(data = NULL, probe = NULL,
                       pch = 20, cex = 0.8,
                       posCol = "green", 
                       density = 80, magnification = 40,
-                      bg = "#D3D3D3", gridBreaks = 3,
-                      lineCol = "grey",
+                      bg = "white", gridBreaks = 3,
+                      lineCol = "darkgrey",
                       subset1 = NULL,
                       subset2 = NULL){
   if((class(data)[1] == "MPIFdata") != TRUE){
