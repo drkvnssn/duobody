@@ -127,13 +127,16 @@ plotCells(data = data, probe = "pdl1", posCol = "purple",
 plotCells(data = data, probe = "pdl1", posCol = "purple", 
           cex = 0.7, density = 70, gridBreaks = 5)
 ```
-### Plotting with a subset
-Added an option to plot a subset from a positive cell population. Add the following option to plotCells: 
+### Plotting with one or two additional subsets
+Added an option to plot a subset from the original positive cell population. Add the following option to plotCells: 
 
-subset = c("probe", "+", "color"): second argument can be "+" or "-".
+subset1 = c("probe", "+", "color")
+subset2 = c("probe", "+", "color")
 
 ```
-plotCells(data = data, probe = "cd3", )
+
+plotCells(data = data, probe = "cd3", subset1 = c("cd8","+","yellow"))
+plotCells(data = data, probe = "cd3", subset1 = c("cd8","+","yellow"), subset2 = c("pax", "+","black"))
 
 ```
 
