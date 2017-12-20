@@ -6,6 +6,7 @@ plotCellSubsetIntensity <- function(data = NULL, subset = NULL, probe,
   colors <- rep(c("lightblue", "lightgreen"), 10)
   ### MATRIX FOR BOXPLOTDATA
   boxplotData <- matrix(data = NA, ncol = length(subset), nrow = 5)
+  rownames(boxplotData) <- c("min","1st","median","3rd","inner fence")
   colnames(boxplotData) <- subset
   xCoord <- matrix(data = NA, ncol = length(subset), nrow = size)
   colnames(xCoord) <- subset
@@ -27,7 +28,8 @@ plotCellSubsetIntensity <- function(data = NULL, subset = NULL, probe,
   main.text <- paste(data@phenoData['samplename', 1], ":", "Boxplots for", probe,"positive cells.")
   boxplot(sample.data$boxplot, col = colors, main = main.text) 
   if(is.numeric(size) == TRUE){
-    points(x = jitter(sample.data$x), y = sample.data$y, cex = 0.3, col = "red", pch = 20)
+    points(x = jitter(sample.data$x), y = sample.data$y, cex = 0.6, col = "red", pch = 20)
   }
+  return(sample.data$boxplot)
 }
   

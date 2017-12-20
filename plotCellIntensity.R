@@ -6,6 +6,7 @@ plotCellIntensity <- function(data = NULL, size = 75){
   
   ### PARSE ALL THE DATA
   boxplotData <- matrix(data = NA, ncol = dim(data@assayData)[2], nrow = 5)
+  rownames(boxplotData) <- c("min","1st","median","3rd","inner fence")
   colnames(boxplotData) <- colnames(data@assayData)
   xCoord <- matrix(data = NA, ncol = dim(data@assayData)[2], nrow = size)
   colnames(xCoord) <- colnames(data@assayData)
@@ -29,6 +30,7 @@ plotCellIntensity <- function(data = NULL, size = 75){
   main.text <- paste(data@phenoData['samplename', 1], ":", "Boxplot of positive cells / probe")
   boxplot(sample.data$boxplot, col = colors, main = main.text) 
   if(is.numeric(size) == TRUE){
-    points(x = jitter(sample.data$x), y = sample.data$y, cex = 0.3, col = "red", pch = 20)
+    points(x = jitter(sample.data$x), y = sample.data$y, cex = 0.6, col = "red", pch = 20)
   }
+  return(sample.data$boxplot)
 }
