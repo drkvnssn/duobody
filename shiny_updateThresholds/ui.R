@@ -1,4 +1,4 @@
-### CHECK THRESHOLDS
+### UPDATE THRESHOLDS
 
 library(shiny)
 
