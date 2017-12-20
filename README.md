@@ -126,6 +126,17 @@ plotCells(data = data, probe = "pdl1", posCol = "purple",
 plotCells(data = data, probe = "pdl1", posCol = "purple", 
           cex = 0.7, density = 70, gridBreaks = 5)
 ```
+### Plotting with a subset
+Added an option to plot a subset from a positive cell population. Add the following option to plotCells: 
+
+subset = c("probe", "+", "color"): second argument can be "+" or "-".
+
+```
+plotCells(data = data, probe = "cd3", )
+
+```
+
+
 ### Plotting the cell intensities for each probe
 
 Boxplot function to look at positive cells for each probe.
