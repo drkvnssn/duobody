@@ -1,6 +1,6 @@
-.getDistance <- function(x1, y1, x2, y2){
-  x <- abs(diff(c(x1, x2)))
-  y <- abs(diff(c(y1, y2)))
+.getDistance <- function(cell1, cell2){
+  x <- abs(diff(c(as.numeric(cell1[1]), as.numeric(cell2[1]))))
+  y <- abs(diff(c(as.numeric(cell1[2]), as.numeric(cell2[2]))))
   result <- sqrt(x**2 + y**2)
   return(result)
 }
