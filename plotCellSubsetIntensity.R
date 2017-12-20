@@ -1,5 +1,5 @@
 plotCellSubsetIntensity <- function(data = NULL, subset = NULL, probe, 
-                                    points = NULL, size = 25, col = "red"){
+                                     size = 25){
   if((class(data)[1] == "MPIFdata") != TRUE){
     stop ("data structure is not in the correct format.\n\n")
   } 

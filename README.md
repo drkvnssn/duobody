@@ -139,12 +139,28 @@ plotCells(data = data, probe = "cd3", )
 
 ### Plotting the cell intensities for each probe
 
-Boxplot function to look at positive cells for each probe.
+Boxplot function to look at positive cells for each probe. Data point can be added by added the number of points 
+you would like to see with 'size'. Colors of the plot are fixed.
 
 ```
 plotIntensity(data = data)
+plotIntensity(data = data, size = 50)
 
 ```
+
+### Plotting the cell intensities of one specific probe for multiple subsets
+
+This will create a subset of positive cells for each probe in the subset and then will create 
+a boxplot of positive cells for a specific 'probe'. Data point can be added by added the number of points 
+you would like to see with 'size'. Colors of the plot are fixed.
+
+
+``` 
+plotCellSubsetIntensity(data = data, subset = c("cd3", "pax"), probe = "pdl1")
+plotCellSubsetIntensity(data = data, subset = c("cd3", "pax"), probe = "pdl1", size = 30)
+
+```
+
 
 ### Analysis 
 
