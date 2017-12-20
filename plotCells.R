@@ -3,7 +3,7 @@ plotCells <- function(data = NULL, probe = NULL,
                       posCol = "green", 
                       density = 80, magnification = 40,
                       bg = "#D3D3D3", gridBreaks = 3,
-                      lineCol = "black",
+                      lineCol = "grey",
                       subset1 = NULL,
                       subset2 = NULL){
   if((class(data)[1] == "MPIFdata") != TRUE){
@@ -61,7 +61,6 @@ plotCells <- function(data = NULL, probe = NULL,
     points(x = data@xyData[posCells,1], y = data@xyData[posCells,2], 
            pch = pch, cex = cex,
            col = posColor[posCells])
-    
   }
   ### PLOTTING THE SUBSET 1
   if(is.character(subset1) == TRUE & length(subset1) == 3){
@@ -80,13 +79,13 @@ plotCells <- function(data = NULL, probe = NULL,
     subset1Col <- rep(subset1Col, dim(data.subset@assayData)[1])
 
     points(x = data.subset@xyData[subset1Cells,1], y = data.subset@xyData[subset1Cells,2], 
-           pch = pch, cex = (cex*0.5),
+           pch = pch, cex = (cex*0.7),
            col = subset1Col[subset1Cells])
     sub.text.right <- paste0(sub.text.right, " / ", paste0(subset1[1],subset1[2]),": ", sum(subset1Cells))
     
     ### PLOTTING THE SUBSET 2
     if(is.character(subset2) == TRUE & length(subset2) == 3){
-      subset2Column <- grep(colnames(data.subset@assayData), pattern = subset[1], ignore.case = TRUE, fixed = FALSE)
+      subset2Column <- grep(colnames(data.subset@assayData), pattern = subset2[1], ignore.case = TRUE, fixed = FALSE)
       data.subset2 <- subsetProbe(data = data.subset, probe = subset2[1])
       
       if(tolower(subset2[2]) == "pos" | tolower(subset2[2]) == "+"){
