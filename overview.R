@@ -1,4 +1,4 @@
-overview <- function(data = NULL, manip = "head"){
+overview <- function(data = NULL, manip = "head", plot = TRUE){
   if((class(data)[1] == "MPIFdata") != TRUE){
     stop ("data structure is not in the correct format.\n\n")
   } 
@@ -25,6 +25,10 @@ overview <- function(data = NULL, manip = "head"){
     print(data@experimentData)
     message("\n'phenoData'")
     print(data@phenoData)
+  }
+  if(plot == TRUE){
+    message("\nBox plot results")
+    plotCellIntensity(data = data)
   }
 }
   

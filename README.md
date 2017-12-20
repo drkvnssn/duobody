@@ -52,7 +52,8 @@ files <- list.files(path = data.path, pattern = ".xlsx", full.names = TRUE)
 
 ### Reading the data
 
-An example of reading one file, getting the overview of all the data and plotting the cells
+An example of reading one file, getting the overview of all the data and plotting the cells. Boxplots of 
+positive cells will be show automatically, but can be turned off with 'plot = FALSE'.
 ```
 data <- readMPIFfile(file = files[2], verbose = FALSE)
 overview(data)
