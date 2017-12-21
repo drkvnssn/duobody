@@ -164,6 +164,30 @@ plotCellSubsetIntensity(data = data, subset = c("cd3", "pax"), probe = "pdl1")
 plotCellSubsetIntensity(data = data, subset = c("cd3", "pax"), probe = "pdl1", size = 30)
 
 ```
+### Calculate distance between cells
+
+With the function below the distance betwen two different probes will be with the calculated by taking the absolute difference of the X and Y coordinates of each cell and calculating the distance with the Pythagoras theorem. 
+Output will be a matrix with coordinates of each cell and corresponding cell and the distance to each other. 
+
+Additional options for the function: 
+
+plot: TRUE / FALSE
+posCol: color probe 1
+probe2 : probe color can be added to probe. ie. c("cd3", "yellow") 
+lineCol : color of lines between cells that will be plotted
+
+```
+test <- calculateDistance(data, probe1 = "cd3", probe2 = "cd163", plot = TRUE, maxDist = 0.01)
+
+> head(test)
+          x.cd3     y.cd3    x.cd163   y.cd163 distance (mm)
+[1,] 0.42888173 0.2628180 0.43779490 0.2633097   0.008926717
+[2,] 0.42255321 0.3304755 0.42255321 0.3304755   0.000000000
+[3,] 0.42255321 0.3304755 0.41993854 0.3365646   0.006626686
+[4,] 0.18031100 0.5405200 0.18397607 0.5483509   0.008646098
+[5,] 0.18677314 0.6341580 0.18784762 0.6243348   0.009881811
+[6,] 0.05804818 0.2303757 0.05068412 0.2359065   0.009209719
+```
 
 
 ### Analysis 
